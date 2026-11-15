@@ -54,7 +54,7 @@ The data layer and rules are separate from the console menu. Booking links are r
 
 ## Testing and automation
 
-`./gradlew check` runs JUnit and the additional tasks **verifyProjectStructure**, **verifyDocumentation**, **verifyConsoleSmoke** (runs the real console and validates its JSON output), and **jacocoTestCoverageVerification**. The JaCoCo gate requires **at least 80% instruction coverage and 70% branch coverage**; `jacocoTestReport` generates HTML/XML reports under `build/reports/jacoco/test/`. GitHub Actions runs the same wrapper and uploads test/coverage artifacts on every PR and push to `main`.
+`./gradlew check` runs JUnit and the additional tasks **verifyProjectStructure**, **verifyDocumentation**, **verifyConsoleSmoke** (runs the real console and validates its JSON output), and **jacocoTestCoverageVerification**. The JaCoCo gate requires **at least 90% instruction coverage and 80% branch coverage**; `jacocoTestReport` generates HTML/XML reports under `build/reports/jacoco/test/`. GitHub Actions runs the same wrapper and uploads test/coverage artifacts on every PR and push to `main`.
 
 Tests cover CRUD, missing/invalid IDs, capacity limits, duplicate bookings, moving a booking, JSON reload and counter continuity, malformed JSON, safe console input, reports and a complete console-to-JSON restart flow.
 
@@ -75,3 +75,7 @@ This is intentionally a **console application** with local JSON, not a GUI or da
 ## Attribution
 
 The lecturer-supplied `notes-app-4.0.zip` was used as an architectural example. The gym domain, models, booking/service rules and reports were developed for this project. AI assisted with project planning, source preparation, test design, code review and GitHub workflow execution; see the AI development record for details.
+
+### Final regression verification
+
+Additional console edge, manual save/reload recovery and deterministic 500-operation relationship-invariant tests are recorded in [TEST_MATRIX.md](docs/TEST_MATRIX.md). The successful [PR #24 test run](https://github.com/20112153/20112153-Software-Development-Tools-App-Project/pull/24) produced **50 passing JUnit tests (0 failed, 0 errors, 0 skipped), 91% instruction coverage and 80% branch coverage**, confirmed by downloadable GitHub Actions reports. The final merged `main` build should also be checked before submission.

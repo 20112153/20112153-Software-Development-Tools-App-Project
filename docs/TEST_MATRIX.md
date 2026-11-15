@@ -41,7 +41,7 @@ Automated tests prove the listed conditions on the tested code and environment; 
 
 ## Honest test result reporting
 
-Use the GitHub Actions test-results and JaCoCo artifacts from the **latest successfully merged main branch build**. Do not copy a previous test count into the final submission without checking the new build. The pre-iteration baseline is 41 passing JUnit tests, 89% instruction coverage and 75% branch coverage (main run #43722066239).
+Use the GitHub Actions test-results and JaCoCo artifacts from the **latest successfully merged main branch build**. Do not copy a previous test count into the final submission without checking the new build. The pre-iteration baseline is 41 passing JUnit tests, 89% instruction coverage and 75% branch coverage (main run #43722066239). The successful **PR #24 run #43723245181**, verified from downloaded JUnit XML and JaCoCo HTML, reports **50 tests, 0 failures/errors/skips, 91% instruction coverage and 80% branch coverage**. The Gradle coverage gate is now raised to 90% instructions / 80% branches. Verify the post-merge `main` run independently before submission.
 
 ## Grade interpretation
 
