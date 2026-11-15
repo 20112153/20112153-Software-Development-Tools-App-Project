@@ -17,7 +17,7 @@ class QualityRegressionTest {
         loaded.restore(gym.snapshot())
         assertTrue(loaded.bookingsForClass(old.id).isEmpty())
         assertEquals(1, loaded.bookingsForClass(new.id).size)
-        assertEquals(0, loaded.classAttendance().first { it.classId == old.id }.booked)
+        assertEquals(0, loaded.classBookingSummary().first { it.classId == old.id }.booked)
     }
 
     @Test fun `invalid capacity update does not change a class`() {

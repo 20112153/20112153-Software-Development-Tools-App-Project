@@ -4,7 +4,7 @@ The lecturer's App brief assigns **20% each** to Functionality, Architecture and
 
 | Criterion | Evidence | Remaining checks |
 | --- | --- | --- |
-| Functionality | Full member/class CRUD and explicit booking Create/Read/Update(move)/Delete; name search, availability filtering, attendance/count reports; validation and JSON persistence | User demo of unusual inputs, deleted links, and restart |
+| Functionality | Full member/class CRUD and explicit booking Create/Read/Update(move)/Delete; name search, availability filtering, booking-occupancy/count reports; validation and JSON persistence | User demo of unusual inputs, deleted links, and restart |
 | Architecture / DX | Separate `model`, `service`, `ui`, `persistence`, and `utils`; no separate database, web app, or unnecessary frameworks | Demonstrate menu behavior and separation to lecturer |
 | GitHub | Separate issues #1, #3, #5, #7, #9, #11, #13, #15, #17; linked feature PRs and passing CI; merged remote branches deleted; README/changelog and manual tag instructions | **Confirm lecturer `sdronan` invited** and **manually publish milestone tags/releases** (GitHub App lacks permission) |
 | Gradle | Gradle 9.3.0 wrapper, automated `check` in Actions; custom `verifyProjectStructure`, `verifyDocumentation`, and `verifyConsoleSmoke` tasks plus JaCoCo reporting/coverage verification | **Review all original Gradle lab tasks**; the supplied rubric excerpt does not enumerate them |
@@ -37,3 +37,9 @@ In the latest *pre-audit* successful CI run (#43718617652), there were **39 pass
 - Zero Git tags/Releases; no verified `sdronan` collaborator access; no full Gradle lab handout to compare. Do **not** claim these are complete.
 
 This subsection describes a verified historical commit and CI run; a later documentation-only commit does not alter the measured application tests or functional logic, but its own CI must also pass.
+
+## Final regression evidence (PR #24)
+
+An additional issue/feature-branch/PR iteration implemented **9 more JUnit tests** (5 console validation/error paths, 3 manual JSON recovery flows, 1 seeded 500-operation relationship invariant test) plus the GitHub test-to-rubric matrix. The PR's downloaded artifacts show **50/50 passed, 91% JaCoCo instruction and 80% branch coverage**. The Gradle gate has been strengthened to 90%/80%; check the newest post-merge CI run. User-facing reports now explicitly represent *bookings/occupancy* rather than actual physical attendance.
+
+**Remaining hard requirements are unchanged:** create multiple annotated Git tags/GitHub Releases, verify lecturer `sdronan` access, compare against the missing Gradle lab instructions, and prepare the GitHub-source ZIP and student-recorded 10-minute video. Avoid presenting the repository as fully submission-ready until those are addressed.

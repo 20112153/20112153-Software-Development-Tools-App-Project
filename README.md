@@ -8,7 +8,7 @@ A Kotlin console application for managing **gym members, class sessions and book
 - **Classes:** add, list, update and delete, with capacity validation.
 - **Bookings (many-to-many):** create, list, move to a different class and cancel. A member may book several classes; a class may contain several members. Invalid and duplicate bookings, full classes and unsafe moves are rejected.
 - **Search/filter:** find members and classes by case-insensitive name; find classes with spaces.
-- **Reports:** booked/capacity/free counts per class and booking totals per member.
+- **Reports:** booked/capacity/free counts per class and booking totals per member. These represent bookings, not verified physical attendance.
 - **JSON storage:** loads on startup, saves on normal exit, and offers manual Save/Load. Saved files preserve next-ID counters; corrupt files are rejected without changing the current in-memory data. Startup will not overwrite an invalid existing save.
 
 Data is stored locally at `data/gym-data.json`. It is not an online or multi-user application.
@@ -33,7 +33,7 @@ On Windows, use `gradlew.bat run` / `gradlew.bat check`. You can also import the
 3. Bookings         Book / List / Cancel / Move
 4. Save             Save JSON now
 5. Load             Load JSON now
-6. Search / Reports Search names, free spaces, attendance figures
+6. Search / Reports Search names, free spaces, booking totals
 0. Exit             Automatically saves JSON
 ```
 
@@ -54,7 +54,7 @@ The data layer and rules are separate from the console menu. Booking links are r
 
 ## Testing and automation
 
-`./gradlew check` runs JUnit and the additional tasks **verifyProjectStructure**, **verifyDocumentation**, **verifyConsoleSmoke** (runs the real console and validates its JSON output), and **jacocoTestCoverageVerification**. The JaCoCo gate requires **at least 80% instruction coverage and 70% branch coverage**; `jacocoTestReport` generates HTML/XML reports under `build/reports/jacoco/test/`. GitHub Actions runs the same wrapper and uploads test/coverage artifacts on every PR and push to `main`.
+`./gradlew check` runs JUnit and the additional tasks **verifyProjectStructure**, **verifyDocumentation**, **verifyConsoleSmoke** (runs the real console and validates its JSON output), and **jacocoTestCoverageVerification**. The JaCoCo gate requires **at least 90% instruction coverage and 80% branch coverage**; `jacocoTestReport` generates HTML/XML reports under `build/reports/jacoco/test/`. GitHub Actions runs the same wrapper and uploads test/coverage artifacts on every PR and push to `main`.
 
 Tests cover CRUD, missing/invalid IDs, capacity limits, duplicate bookings, moving a booking, JSON reload and counter continuity, malformed JSON, safe console input, reports and a complete console-to-JSON restart flow.
 
@@ -66,7 +66,7 @@ Each iteration uses **issue → feature branch → meaningful commit(s) → pull
 
 ## Submission and AI assistance
 
-Read [Submission Checklist](docs/SUBMISSION_CHECKLIST.md), [Rubric Review](docs/RUBRIC_REVIEW.md), [Independent Audit](docs/INDEPENDENT_AUDIT_2026-11-15.md), and [AI Development Record](docs/AI_DEVELOPMENT.md). The submission instructions require a **GitHub-downloaded ZIP** and a **video of no more than 10 minutes** walking through the code and AI development process (not a GitHub tour). Confirm lecturer `sdronan` has repository access.
+Read [Submission Checklist](docs/SUBMISSION_CHECKLIST.md), [Rubric Review](docs/RUBRIC_REVIEW.md), [Independent Audit](docs/INDEPENDENT_AUDIT_2026-11-15.md), [Test Matrix](docs/TEST_MATRIX.md), and [AI Development Record](docs/AI_DEVELOPMENT.md). The submission instructions require a **GitHub-downloaded ZIP** and a **video of no more than 10 minutes** walking through the code and AI development process (not a GitHub tour). Confirm lecturer `sdronan` has repository access.
 
 ## Known limits
 
@@ -75,3 +75,7 @@ This is intentionally a **console application** with local JSON, not a GUI or da
 ## Attribution
 
 The lecturer-supplied `notes-app-4.0.zip` was used as an architectural example. The gym domain, models, booking/service rules and reports were developed for this project. AI assisted with project planning, source preparation, test design, code review and GitHub workflow execution; see the AI development record for details.
+
+### Final regression verification
+
+Additional console edge, manual save/reload recovery and deterministic 500-operation relationship-invariant tests are recorded in [TEST_MATRIX.md](docs/TEST_MATRIX.md). The successful [PR #24 test run](https://github.com/20112153/20112153-Software-Development-Tools-App-Project/pull/24) produced **50 passing JUnit tests (0 failed, 0 errors, 0 skipped), 91% instruction coverage and 80% branch coverage**, confirmed by downloadable GitHub Actions reports. The final merged `main` build should also be checked before submission.

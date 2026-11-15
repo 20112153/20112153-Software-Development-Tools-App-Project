@@ -94,7 +94,7 @@ class GymConsole(
         while (true) {
             output("")
             output("Search / Reports: 1. Find member  2. Find class  3. Available classes")
-            output("4. Class attendance  5. Member booking counts  0. Back")
+            output("4. Class booking totals  5. Member booking counts  0. Back")
             when (ask("Select: ") ?: return) {
                 "1" -> {
                     val term = ask("Member name contains: ") ?: return
@@ -118,7 +118,7 @@ class GymConsole(
                     else available.forEach { output("#${it.classId}: ${it.name} (${it.remaining} free)") }
                 }
                 "4" -> {
-                    val report = gym.classAttendance()
+                    val report = gym.classBookingSummary()
                     if (report.isEmpty()) output("No classes found.")
                     else report.forEach {
                         output("#${it.classId}: ${it.name} - ${it.booked}/${it.capacity} booked, ${it.remaining} free")
