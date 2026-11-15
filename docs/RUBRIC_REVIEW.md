@@ -16,7 +16,7 @@ A console app demonstrates reliable input handling without a JavaFX/web UI. The 
 
 ## Assignment-specific reminders
 
-The brief says failing to use GitHub workflow **throughout** development results in a failing App grade. It requires a ZIP downloaded from GitHub and a <=10-minute recorded code/AI-development walk-through (no GitHub tours). Verify `sdronan` access and any Week 8 timing requirement with the lecturer.
+The brief says failing to use GitHub workflow **throughout** development results in a failing App grade. It also requires the project source ZIP to come from GitHub. Verify `sdronan` access and any Week 8 timing requirement with the lecturer.
 
 This document cannot certify unknown lab-specific requirements or predict the final grade.
 
@@ -42,4 +42,4 @@ This subsection describes a verified historical commit and CI run; a later docum
 
 An additional issue/feature-branch/PR iteration implemented **9 more JUnit tests** (5 console validation/error paths, 3 manual JSON recovery flows, 1 seeded 500-operation relationship invariant test) plus the GitHub test-to-rubric matrix. The PR's downloaded artifacts show **50/50 passed, 91% JaCoCo instruction and 80% branch coverage**. The Gradle gate has been strengthened to 90%/80%; check the newest post-merge CI run. User-facing reports now explicitly represent *bookings/occupancy* rather than actual physical attendance.
 
-**Remaining hard requirements are unchanged:** create multiple annotated Git tags/GitHub Releases, verify lecturer `sdronan` access, compare against the missing Gradle lab instructions, and prepare the GitHub-source ZIP and student-recorded 10-minute video. Avoid presenting the repository as fully submission-ready until those are addressed.
+**Remaining hard requirements are unchanged:** create multiple annotated Git tags/GitHub Releases, verify lecturer `sdronan` access, compare against the missing Gradle lab instructions, and prepare the GitHub-source ZIP. Avoid presenting the repository as fully submission-ready until those are addressed.

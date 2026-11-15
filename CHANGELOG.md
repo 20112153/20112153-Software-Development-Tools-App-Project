@@ -29,7 +29,7 @@ Generated official Gradle wrapper; checked-in quality tasks and coverage gate; r
 ## v1.0.0 — Documentation and submission-ready code
 **Issue:** #13 · **PR:** linked from issue
 
-Full README, rubric review, AI-use record and submission/video checklist. Version `v1.0.0` should be tagged only after the final merged `main` code and tests are verified.
+Full README, rubric review, AI-use record and submission checklist. Version `v1.0.0` should be tagged only after the final merged `main` code and tests are verified.
 
 **Note:** Tag the historical merged milestone commits retrospectively using the instructions below; do not imply that these tags existed when the work was first merged.
 

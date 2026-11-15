@@ -41,7 +41,7 @@ The lecturer's Notes App reference has Kotlin `2.3.21`, Gradle wrapper `9.3.0`, 
 2. Check `sdronan` in Settings → Collaborators and pending invitations.
 3. Create and publish multiple Git tags and GitHub Release objects using the documented manual instructions; the connected GitHub App was denied those permissions.
 4. On the student's local machine, Fetch → Checkout `main` → delete stale local feature branches.
-5. Download the source ZIP **from the final GitHub repository** and record a code/AI-process video no longer than 10 minutes; no GitHub UI tour.
+5. Download the source ZIP **from the final GitHub repository** and complete the remaining Moodle submission steps independently.
 
 ## What this audit cannot claim
 
