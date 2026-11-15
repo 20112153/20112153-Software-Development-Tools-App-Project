@@ -6,7 +6,7 @@ The lecturer's App brief assigns **20% each** to Functionality, Architecture and
 | --- | --- | --- |
 | Functionality | Full member/class CRUD and explicit booking Create/Read/Update(move)/Delete; name search, availability filtering, attendance/count reports; validation and JSON persistence | User demo of unusual inputs, deleted links, and restart |
 | Architecture / DX | Separate `model`, `service`, `ui`, `persistence`, and `utils`; no separate database, web app, or unnecessary frameworks | Demonstrate menu behavior and separation to lecturer |
-| GitHub | Separate issues #1, #3, #5, #7, #9, #11, #13; linked feature PRs and passing CI; merged branches deleted; README/changelog; milestone tags/releases | **Confirm lecturer `sdronan` invited**, verify all release tags are visible |
+| GitHub | Separate issues #1, #3, #5, #7, #9, #11, #13; linked feature PRs and passing CI; merged branches deleted; README/changelog; milestone Git tags (Release objects require manual publication due GitHub token permissions) | **Confirm lecturer `sdronan` invited**, verify all release tags are visible |
 | Gradle | Gradle 9.3.0 wrapper, automated `check` in Actions; custom `verifyProjectStructure` and `verifyDocumentation` tasks plus JaCoCo reporting/coverage verification | **Review all original Gradle lab tasks**; the supplied rubric excerpt does not enumerate them |
 | JUnit | Service, console, booking-rescheduling, snapshot, JSON, reporting and edge-case tests; automated CI and 65% coverage gate | Check latest green CI and discuss representative boundary tests |
 
