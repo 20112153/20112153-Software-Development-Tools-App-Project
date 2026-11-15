@@ -54,9 +54,9 @@ The data layer and rules are separate from the console menu. Booking links are r
 
 ## Testing and automation
 
-`./gradlew check` runs JUnit and the additional tasks **verifyProjectStructure**, **verifyDocumentation**, and **jacocoTestCoverageVerification**. The coverage gate is **65% minimum**; `jacocoTestReport` generates HTML/XML reports under `build/reports/jacoco/test/`. GitHub Actions runs the same wrapper and uploads test/coverage artifacts on every PR and push to `main`.
+`./gradlew check` runs JUnit and the additional tasks **verifyProjectStructure**, **verifyDocumentation**, **verifyConsoleSmoke** (runs the real console and validates its JSON output), and **jacocoTestCoverageVerification**. The JaCoCo gate requires **at least 80% instruction coverage and 70% branch coverage**; `jacocoTestReport` generates HTML/XML reports under `build/reports/jacoco/test/`. GitHub Actions runs the same wrapper and uploads test/coverage artifacts on every PR and push to `main`.
 
-Tests cover CRUD, missing/invalid IDs, capacity limits, duplicate bookings, moving a booking, JSON reload and counter continuity, malformed JSON, safe console input and searches/reports.
+Tests cover CRUD, missing/invalid IDs, capacity limits, duplicate bookings, moving a booking, JSON reload and counter continuity, malformed JSON, safe console input, reports and a complete console-to-JSON restart flow.
 
 ## GitHub workflow and releases
 
@@ -64,7 +64,7 @@ Each iteration uses **issue → feature branch → meaningful commit(s) → pull
 
 ## Submission and AI assistance
 
-Read [Submission Checklist](docs/SUBMISSION_CHECKLIST.md), [Rubric Review](docs/RUBRIC_REVIEW.md) and [AI Development Record](docs/AI_DEVELOPMENT.md). The submission instructions require a **GitHub-downloaded ZIP** and a **video of no more than 10 minutes** walking through the code and AI development process (not a GitHub tour). Confirm lecturer `sdronan` has repository access.
+Read [Submission Checklist](docs/SUBMISSION_CHECKLIST.md), [Rubric Review](docs/RUBRIC_REVIEW.md), [Independent Audit](docs/INDEPENDENT_AUDIT_2026-11-15.md), and [AI Development Record](docs/AI_DEVELOPMENT.md). The submission instructions require a **GitHub-downloaded ZIP** and a **video of no more than 10 minutes** walking through the code and AI development process (not a GitHub tour). Confirm lecturer `sdronan` has repository access.
 
 ## Known limits
 

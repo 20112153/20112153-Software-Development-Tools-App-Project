@@ -8,8 +8,10 @@ The lecturer's submission slide asks for **(a)** one ZIP containing source code 
 - [ ] **Create annotated Git tags** `v0.1.0` through `v1.0.0` using [Manual Release Instructions](RELEASE_MANUAL.md), then verify each points to the intended commit. The connected GitHub App cannot create them.
 - [ ] **Publish GitHub Releases manually**: open **Releases → Draft a new release**, select each tag, use the matching notes from `CHANGELOG.md`, and click **Publish release**. GitHub API and tag-push attempts failed due missing integration permissions.
 - [ ] In GitHub **Settings → Collaborators / Access**, invite or verify lecturer **sdronan**; the brief specifies Week 8. A pending invitation may require acceptance.
-- [ ] Run `./gradlew clean check jacocoTestReport` (Windows: `gradlew.bat`) with JDK 21.
+- [ ] Obtain the **original Gradle lab handouts** and check each required lab task is present and executed successfully by GitHub Actions. The rubric screenshot alone is not enough to certify this.
+- [ ] Run `./gradlew clean check jacocoTestReport` (Windows: `gradlew.bat`) with JDK 21; confirm both instruction and branch coverage gates pass.
 - [ ] Demonstrate CRUD, invalid booking, safe booking move, JSON save/load and at least one report.
+- [ ] In IntelliJ, follow the lecturer's final local branch cleanup: **Git → Fetch → Checkout main → delete the old local feature branch**, and check the merged commits remain visible. Remote branch deletion was already automated.
 - [ ] Download the GitHub **Code → Download ZIP** from the final main branch; do **not** submit a stale earlier archive.
 - [ ] Record your own video under 10 minutes and upload/link it as Moodle requires.
 - [ ] Submit both source ZIP and video link before the deadline.
