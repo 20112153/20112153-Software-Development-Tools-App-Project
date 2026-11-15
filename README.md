@@ -66,3 +66,7 @@ For each change: **create an issue → feature branch → meaningful commit(s) �
 ## Attribution and AI use
 
 Project structure is inspired by the lecturer-provided Notes App example. The gym domain, many-to-many booking logic, menus and tests are adapted specifically for this project. AI assisted in preparing the code and testing plan; the student should review, test and be able to explain the implementation.
+
+## Iteration: booking updates
+
+The booking submenu also supports **Move booking** (option 4). A move is validated before changing the original booking, so full or missing destination classes and duplicate bookings do not lose data. The corresponding service and console tests are included.
