@@ -98,7 +98,7 @@ tasks.register<JavaExec>("verifyConsoleSmoke") {
     mainClass.set("MainKt")
     workingDir = layout.buildDirectory.dir("console-smoke").get().asFile
     standardInput = java.io.ByteArrayInputStream(
-        "1\\n1\\nAlex\\n0\\n2\\n1\\nYoga\\n2\\n0\\n3\\n1\\n1\\n1\\n0\\n0\\n".toByteArray()
+        "1\n1\nAlex\n0\n2\n1\nYoga\n2\n0\n3\n1\n1\n1\n0\n0\n".toByteArray()
     )
     doFirst {
         workingDir.mkdirs()
