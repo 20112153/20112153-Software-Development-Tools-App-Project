@@ -44,6 +44,6 @@ Check that five Releases are visible. No other app-code changes are needed to pu
 
 ## 4. Validate and submit
 
-Confirm release versions and commit targets in GitHub, invite/verify the lecturer's `sdronan` account, then download the **final GitHub source ZIP** and record the code/AI-process video under 10 minutes. The requirements are summarised in [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md).
+Confirm release versions and commit targets in GitHub, invite/verify the lecturer's `sdronan` account, then download the **final GitHub source ZIP**. The requirements are summarised in [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md).
 
 **Why not run the automation again?** The GitHub logs show a permissions denial; retrying without changed app permissions cannot solve it.

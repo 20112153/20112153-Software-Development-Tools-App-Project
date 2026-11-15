@@ -37,7 +37,7 @@ Automated tests prove the listed conditions on the tested code and environment; 
 - **NOT complete:** the Excellent GitHub column explicitly requires **multiple tagged releases**. The connected GitHub App was denied permission to create tags/Releases. Follow `docs/RELEASE_MANUAL.md` from an authenticated owner account.
 - **Not confirmed:** the lecturer's required Week 8 GitHub invitation to `sdronan`; collaborator permission returned null and pending invites were not accessible.
 - **Gradle unknown:** all lab-work tasks must be present and working in Actions, but **individual Gradle lab handouts were not supplied**. The Notes App alone is not proof that each task was done.
-- **Submission not complete:** the source ZIP must be downloaded from GitHub, and the student must submit their own video link (maximum 10 minutes) walking through code/AI-development—not a GitHub tour.
+- **Submission not complete:** the source ZIP must be downloaded from GitHub, and remaining Moodle submission steps must be completed independently.
 
 ## Honest test result reporting
 

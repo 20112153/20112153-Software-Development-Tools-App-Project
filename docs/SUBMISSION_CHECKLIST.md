@@ -1,6 +1,6 @@
-# Submission Checklist and 10-minute walkthrough plan
+# Submission Checklist
 
-The lecturer's submission slide asks for **(a)** one ZIP containing source code *downloaded from the GitHub repository*, and **(b)** a link to a video (maximum 10 minutes) walking through the **codebase and AI development process** — explicitly *no GitHub tours*.
+This checklist covers GitHub source packaging, repository access, build verification and release preparation before Moodle submission.
 
 ## Before submitting
 
@@ -13,9 +13,8 @@ The lecturer's submission slide asks for **(a)** one ZIP containing source code 
 - [ ] Demonstrate CRUD, invalid booking, safe booking move, JSON save/load and at least one report.
 - [ ] In IntelliJ, follow the lecturer's final local branch cleanup: **Git → Fetch → Checkout main → delete the old local feature branch**, and check the merged commits remain visible. Remote branch deletion was already automated.
 - [ ] Download exactly **one final source ZIP** from GitHub's **Code → Download ZIP** while on `main` (the literal method in the lecturer's submission brief). Alternatively, from the latest successful main Actions run, download `github-source-zip`, extract **only** the contained `gym-class-manager-source.zip`, verify `SOURCE_COMMIT.txt`, and confirm with the lecturer if the Actions-produced GitHub archive is acceptable. Do **not** submit the outer artifact archive, build outputs or an old feature-branch ZIP.
-- [ ] Independently record your own video (maximum 10 minutes) walking through the codebase and AI development process, **without a GitHub tour**; upload/link it as Moodle requires.
-- [ ] Submit both source ZIP and video link before the deadline.
+- [ ] Complete the remaining Moodle submission steps independently before the deadline.
 
 ## Known manual actions
 
-The connected GitHub tools can verify repository commits, issues and PRs, but do not expose an authorized collaborator-invitation action. The student must check/invite `sdronan` in GitHub settings. The student must also record/upload the video, and check any lab specifications not provided in the assignment excerpt.
+The connected GitHub tools can verify repository commits, issues and PRs, but do not expose an authorized collaborator-invitation action. The student must check/invite `sdronan` in GitHub settings. The student must also check any lab specifications not provided in the assignment excerpt.
