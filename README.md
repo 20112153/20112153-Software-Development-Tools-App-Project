@@ -62,11 +62,15 @@ Tests cover CRUD, missing/invalid IDs, capacity limits, duplicate bookings, movi
 
 ## GitHub workflow and releases
 
-Each iteration uses **issue → feature branch → meaningful commit(s) → pull request referencing issue → CI → merge → issue closes → delete branch**. Versions and the corresponding milestone commits are documented in [CHANGELOG.md](CHANGELOG.md). The connected GitHub App cannot publish annotated Git tags or Release objects because its token lacks required workflow/release permissions. **Tags and Releases are not yet published**. See [Manual Release Instructions](docs/RELEASE_MANUAL.md) for the owner's short, verified milestone-tag commands and GitHub UI publication steps.
+Each iteration uses **issue → feature branch → meaningful commit(s) → pull request referencing issue → CI → merge → issue closes → delete branch**. Versions and the corresponding milestone commits are documented in [CHANGELOG.md](CHANGELOG.md). The connected GitHub App cannot publish annotated Git tags or Release objects because its token lacks required workflow/release permissions. **Tags and Releases are not yet published**. See [Manual Release Instructions](docs/RELEASE_MANUAL.md) and the owner-run `scripts/publish-releases.sh` for safe historical annotated tags and release publication. This helper requires your own authenticated Git/GitHub CLI account; it is not executed by CI.
+
+## Source ZIP produced by GitHub Actions
+
+After successful tests on each commit, GitHub Actions now archives the checked-out Git commit using `git archive` and uploads the `github-source-zip` artifact. Open the **latest successful main branch run**, find the artifact, download it and extract the inner `gym-class-manager-source.zip`. The archive also includes `SOURCE_COMMIT.txt` and `SHA256SUMS.txt` for verification. **For literal compliance with the lecturer's wording**, the simplest option is still to use the GitHub repository's **Code → Download ZIP** on `main` after all merges, and submit that single ZIP; do not submit JUnit/coverage ZIPs or an old feature-branch artifact.
 
 ## Submission and AI assistance
 
-Read [Submission Checklist](docs/SUBMISSION_CHECKLIST.md), [Rubric Review](docs/RUBRIC_REVIEW.md), [Independent Audit](docs/INDEPENDENT_AUDIT_2026-11-15.md), [Test Matrix](docs/TEST_MATRIX.md), and [AI Development Record](docs/AI_DEVELOPMENT.md). The submission instructions require a **GitHub-downloaded ZIP** and a **video of no more than 10 minutes** walking through the code and AI development process (not a GitHub tour). Confirm lecturer `sdronan` has repository access.
+Read [Submission Checklist](docs/SUBMISSION_CHECKLIST.md), [Rubric Review](docs/RUBRIC_REVIEW.md), [Independent Audit](docs/INDEPENDENT_AUDIT_2026-11-15.md), [Test Matrix](docs/TEST_MATRIX.md), [Video Walkthrough Guide](docs/VIDEO_WALKTHROUGH_GUIDE.md) and [AI Development Record](docs/AI_DEVELOPMENT.md). The submission instructions require a **GitHub-downloaded ZIP** and a **video of no more than 10 minutes** walking through the code and AI development process (not a GitHub tour). Confirm lecturer `sdronan` has repository access.
 
 ## Known limits
 

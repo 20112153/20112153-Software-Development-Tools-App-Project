@@ -4,16 +4,16 @@ The lecturer's submission slide asks for **(a)** one ZIP containing source code 
 
 ## Before submitting
 
-- [ ] Open the final `main` branch and confirm the latest **Kotlin Build and Tests** GitHub Actions run passed. The independent audit's verified baseline was [run #43721606288](https://github.com/20112153/20112153-Software-Development-Tools-App-Project/actions/runs/43721606288): 41 tests, 89% instruction / 75% branch coverage; check the current run as well.
-- [ ] **Create annotated Git tags** `v0.1.0` through `v1.0.0` using [Manual Release Instructions](RELEASE_MANUAL.md), then verify each points to the intended commit. The connected GitHub App cannot create them.
-- [ ] **Publish GitHub Releases manually**: open **Releases → Draft a new release**, select each tag, use the matching notes from `CHANGELOG.md`, and click **Publish release**. GitHub API and tag-push attempts failed due missing integration permissions.
+- [ ] Open the final `main` branch and confirm the latest **Kotlin Build and Tests** GitHub Actions run passed. After the packaging iteration, also verify the `github-source-zip` artifact exists in that run. The independent audit's verified baseline was [run #43721606288](https://github.com/20112153/20112153-Software-Development-Tools-App-Project/actions/runs/43721606288): 41 tests, 89% instruction / 75% branch coverage; check the current run as well.
+- [ ] **Create annotated Git tags** `v0.1.0` through `v1.0.0` with your own authorized Git account; use the guarded `scripts/publish-releases.sh` helper (instructions: [Release Guide](RELEASE_MANUAL.md)), or follow the documented commands manually. Verify each tag's commit.
+- [ ] **Publish multiple GitHub Releases**: the helper creates them using your own authenticated `gh` CLI; alternatively open **Releases → Draft a new release** and publish each tagged version using notes from `CHANGELOG.md`. Confirm they appear on GitHub; the connected App could not do this itself.
 - [ ] In GitHub **Settings → Collaborators / Access**, invite or verify lecturer **sdronan**; the brief specifies Week 8. A pending invitation may require acceptance.
 - [ ] Obtain the **original Gradle lab handouts** and check each required lab task is present and executed successfully by GitHub Actions. The rubric screenshot alone is not enough to certify this.
 - [ ] Run `./gradlew clean check jacocoTestReport` (Windows: `gradlew.bat`) with JDK 21; confirm both instruction and branch coverage gates pass.
 - [ ] Demonstrate CRUD, invalid booking, safe booking move, JSON save/load and at least one report.
 - [ ] In IntelliJ, follow the lecturer's final local branch cleanup: **Git → Fetch → Checkout main → delete the old local feature branch**, and check the merged commits remain visible. Remote branch deletion was already automated.
-- [ ] Download the GitHub **Code → Download ZIP** from the final main branch; do **not** submit a stale earlier archive.
-- [ ] Record your own video under 10 minutes and upload/link it as Moodle requires.
+- [ ] Download exactly **one final source ZIP** from GitHub's **Code → Download ZIP** while on `main` (the literal method in the lecturer's submission brief). Alternatively, from the latest successful main Actions run, download `github-source-zip`, extract **only** the contained `gym-class-manager-source.zip`, verify `SOURCE_COMMIT.txt`, and confirm with the lecturer if the Actions-produced GitHub archive is acceptable. Do **not** submit the outer artifact archive, build outputs or an old feature-branch ZIP.
+- [ ] Record your own **under-10-minute** code-and-AI-process video using [Video Walkthrough Guide](VIDEO_WALKTHROUGH_GUIDE.md), without a GitHub tour; upload/link it as Moodle requires.
 - [ ] Submit both source ZIP and video link before the deadline.
 
 ## Suggested video structure
