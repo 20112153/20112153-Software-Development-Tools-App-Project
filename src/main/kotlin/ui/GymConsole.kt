@@ -36,13 +36,14 @@ class GymConsole(
         try {
         while (true) {
             output("")
-            output("1. Members  2. Classes  3. Bookings  4. Save  5. Load  0. Exit")
+            output("1. Members  2. Classes  3. Bookings  4. Save  5. Load  6. Search / Reports  0. Exit")
             when (ask("Select: ") ?: return) {
                 "1" -> membersMenu()
                 "2" -> classesMenu()
                 "3" -> bookingsMenu()
                 "4" -> saveData()
                 "5" -> loadData()
+                "6" -> searchReportsMenu()
                 "0" -> {
                     output("Goodbye!")
                     return
@@ -80,6 +81,51 @@ class GymConsole(
             output("Data loaded.")
         } catch (error: Exception) {
             output("Could not load data: ${error.message}")
+        }
+    }
+
+    private fun searchReportsMenu() {
+        while (true) {
+            output("")
+            output("Search / Reports: 1. Find member  2. Find class  3. Available classes")
+            output("4. Class attendance  5. Member booking counts  0. Back")
+            when (ask("Select: ") ?: return) {
+                "1" -> {
+                    val term = ask("Member name contains: ") ?: return
+                    safely {
+                        val results = gym.searchMembers(term)
+                        if (results.isEmpty()) output("No matching members.")
+                        else results.forEach { output("#${it.id}: ${it.name}") }
+                    }
+                }
+                "2" -> {
+                    val term = ask("Class name contains: ") ?: return
+                    safely {
+                        val results = gym.searchClasses(term)
+                        if (results.isEmpty()) output("No matching classes.")
+                        else results.forEach { output("#${it.id}: ${it.name}") }
+                    }
+                }
+                "3" -> {
+                    val available = gym.classesWithSpace()
+                    if (available.isEmpty()) output("No classes with available spaces.")
+                    else available.forEach { output("#${it.classId}: ${it.name} (${it.remaining} free)") }
+                }
+                "4" -> {
+                    val report = gym.classAttendance()
+                    if (report.isEmpty()) output("No classes found.")
+                    else report.forEach {
+                        output("#${it.classId}: ${it.name} - ${it.booked}/${it.capacity} booked, ${it.remaining} free")
+                    }
+                }
+                "5" -> {
+                    val report = gym.memberBookingCounts()
+                    if (report.isEmpty()) output("No members found.")
+                    else report.forEach { output("#${it.memberId}: ${it.name} - ${it.count} bookings") }
+                }
+                "0" -> return
+                else -> output("Invalid option. Please try again.")
+            }
         }
     }
 
