@@ -32,3 +32,7 @@ Generated official Gradle wrapper; checked-in quality tasks and coverage gate; r
 Full README, rubric review, AI-use record, submission/video checklist and published GitHub Releases. Tagged from the successful final `main` CI run.
 
 **Note:** The older milestone commits are tagged retrospectively to preserve the genuine chronological source versions, rather than pretending the release tags existed when those commits were first merged.
+
+## GitHub Release publication
+
+The CI-completion workflow automatically pushes **annotated Git tags** for these milestones after successful builds. The connected GitHub Actions token returned HTTP 403 when trying to create GitHub Release objects; create the corresponding releases manually in GitHub from the existing tags, using the milestone notes above. Tags are still grounded in the actual merged commits.

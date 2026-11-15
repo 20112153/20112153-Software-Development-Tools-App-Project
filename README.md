@@ -60,7 +60,7 @@ Tests cover CRUD, missing/invalid IDs, capacity limits, duplicate bookings, movi
 
 ## GitHub workflow and releases
 
-Each iteration uses **issue → feature branch → meaningful commit(s) → pull request referencing issue → CI → merge → issue closes → delete branch**. Versions and the corresponding milestone commits are documented in [CHANGELOG.md](CHANGELOG.md); GitHub Releases provides tagged source snapshots.
+Each iteration uses **issue → feature branch → meaningful commit(s) → pull request referencing issue → CI → merge → issue closes → delete branch**. Versions and the corresponding milestone commits are documented in [CHANGELOG.md](CHANGELOG.md). Annotated Git tags are created after passing CI. Because the GitHub Actions token cannot create Release objects (HTTP 403), publish Releases manually from those tags as described in the submission checklist.
 
 ## Submission and AI assistance
 

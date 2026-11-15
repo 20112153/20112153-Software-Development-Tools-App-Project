@@ -5,7 +5,8 @@ The lecturer's submission slide asks for **(a)** one ZIP containing source code 
 ## Before submitting
 
 - [ ] Open the final `main` branch and confirm the latest **Kotlin Build and Tests** GitHub Actions run passed.
-- [ ] Confirm GitHub releases `v0.1.0` through `v1.0.0` exist and match the intended commits.
+- [ ] Confirm the annotated Git tags `v0.1.0` through `v1.0.0` exist and point to the intended milestone commits.
+- [ ] **Publish GitHub Release objects manually**, if missing: open **Releases → Draft a new release**, choose each existing tag, use its milestone notes from `CHANGELOG.md`, and click **Publish release**. GitHub Actions could not create Releases (HTTP 403: Resource not accessible by integration).
 - [ ] In GitHub **Settings → Collaborators / Access**, invite or verify lecturer **sdronan**; the brief specifies Week 8. A pending invitation may require acceptance.
 - [ ] Run `./gradlew clean check jacocoTestReport` (Windows: `gradlew.bat`) with JDK 21.
 - [ ] Demonstrate CRUD, invalid booking, safe booking move, JSON save/load and at least one report.
