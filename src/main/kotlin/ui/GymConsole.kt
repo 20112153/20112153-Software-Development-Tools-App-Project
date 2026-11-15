@@ -2,6 +2,7 @@ package ui
 
 import service.BookingResult
 import service.GymService
+import service.RescheduleResult
 import utils.readText
 
 /**
@@ -64,11 +65,12 @@ class GymConsole(
     private fun bookingsMenu() {
         while (true) {
             output("")
-            output("Bookings: 1. Book class  2. List bookings  3. Cancel booking  0. Back")
+            output("Bookings: 1. Book class  2. List bookings  3. Cancel booking  4. Move booking  0. Back")
             when (ask("Select: ") ?: return) {
                 "1" -> createBooking()
                 "2" -> listBookings()
                 "3" -> cancelBooking()
+                "4" -> moveBooking()
                 "0" -> return
                 else -> output("Invalid option. Please try again.")
             }
@@ -155,6 +157,21 @@ class GymConsole(
             BookingResult.CLASS_NOT_FOUND -> output("Class not found.")
             BookingResult.ALREADY_BOOKED -> output("Member is already booked into this class.")
             BookingResult.CLASS_FULL -> output("Class is full.")
+        }
+    }
+
+    private fun moveBooking() {
+        val memberId = positiveInt("Member ID: ") ?: return
+        val oldClassId = positiveInt("Current class ID: ") ?: return
+        val newClassId = positiveInt("New class ID: ") ?: return
+        when (gym.rescheduleBooking(memberId, oldClassId, newClassId)) {
+            RescheduleResult.MOVED -> output("Booking moved to the new class.")
+            RescheduleResult.UNCHANGED -> output("Booking is already in that class.")
+            RescheduleResult.MEMBER_NOT_FOUND -> output("Member not found.")
+            RescheduleResult.BOOKING_NOT_FOUND -> output("Original booking not found.")
+            RescheduleResult.CLASS_NOT_FOUND -> output("New class not found.")
+            RescheduleResult.ALREADY_BOOKED -> output("Member already has a booking in the new class.")
+            RescheduleResult.CLASS_FULL -> output("New class is full. Original booking kept.")
         }
     }
 

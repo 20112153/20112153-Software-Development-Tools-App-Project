@@ -6,6 +6,8 @@ import model.Member
 
 enum class BookingResult { CREATED, MEMBER_NOT_FOUND, CLASS_NOT_FOUND, ALREADY_BOOKED, CLASS_FULL }
 
+enum class RescheduleResult { MOVED, UNCHANGED, MEMBER_NOT_FOUND, BOOKING_NOT_FOUND, CLASS_NOT_FOUND, ALREADY_BOOKED, CLASS_FULL }
+
 /** Stores members, classes and their many-to-many bookings in memory. */
 class GymService {
     private val members = linkedMapOf<Int, Member>()
@@ -67,6 +69,20 @@ class GymService {
         if (bookings.count { it.classId == classId } >= session.capacity) return BookingResult.CLASS_FULL
         bookings.add(booking)
         return BookingResult.CREATED
+    }
+
+    /** Moves a booking only after validating the destination; failures leave the source intact. */
+    fun rescheduleBooking(memberId: Int, oldClassId: Int, newClassId: Int): RescheduleResult {
+        if (memberId !in members) return RescheduleResult.MEMBER_NOT_FOUND
+        val original = Booking(memberId, oldClassId)
+        if (original !in bookings) return RescheduleResult.BOOKING_NOT_FOUND
+        val destination = classes[newClassId] ?: return RescheduleResult.CLASS_NOT_FOUND
+        if (oldClassId == newClassId) return RescheduleResult.UNCHANGED
+        if (Booking(memberId, newClassId) in bookings) return RescheduleResult.ALREADY_BOOKED
+        if (bookings.count { it.classId == newClassId } >= destination.capacity) return RescheduleResult.CLASS_FULL
+        bookings.remove(original)
+        bookings.add(Booking(memberId, newClassId))
+        return RescheduleResult.MOVED
     }
 
     fun cancelBooking(memberId: Int, classId: Int): Boolean =
