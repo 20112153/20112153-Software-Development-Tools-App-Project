@@ -18,6 +18,7 @@ class GymService {
 
     fun addMember(name: String): Member {
         require(name.isNotBlank()) { "Member name cannot be blank." }
+        require(nextMemberId < Int.MAX_VALUE) { "Member ID limit reached." }
         return Member(nextMemberId++, name.trim()).also { members[it.id] = it }
     }
 
@@ -39,6 +40,7 @@ class GymService {
     fun addClass(name: String, capacity: Int): ClassSession {
         require(name.isNotBlank()) { "Class name cannot be blank." }
         require(capacity > 0) { "Capacity must be positive." }
+        require(nextClassId < Int.MAX_VALUE) { "Class ID limit reached." }
         return ClassSession(nextClassId++, name.trim(), capacity).also { classes[it.id] = it }
     }
 
