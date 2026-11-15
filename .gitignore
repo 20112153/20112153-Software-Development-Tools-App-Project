@@ -1,0 +1,9 @@
+.gradle/
+build/
+out/
+.idea/
+*.iml
+.DS_Store
+*.log
+# Locally saved app data (future persistence feature)
+/data/
