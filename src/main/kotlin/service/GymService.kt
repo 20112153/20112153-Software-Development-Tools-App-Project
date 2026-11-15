@@ -88,6 +88,52 @@ class GymService {
     fun cancelBooking(memberId: Int, classId: Int): Boolean =
         bookings.remove(Booking(memberId, classId))
 
+    /** A portable copy of all data, including counters after deletions. */
+    fun snapshot(): GymSnapshot = GymSnapshot(
+        members = listMembers(),
+        classes = listClasses(),
+        bookings = bookings.toList(),
+        nextMemberId = nextMemberId,
+        nextClassId = nextClassId
+    )
+
+    /** Validate the entire snapshot before making any changes to live data. */
+    fun restore(snapshot: GymSnapshot) {
+        require(snapshot.formatVersion == 1) { "Unsupported save file version." }
+        val memberIds = snapshot.members.map { it.id }
+        val classIds = snapshot.classes.map { it.id }
+        require(snapshot.members.all { it.id > 0 && it.name.isNotBlank() }) { "Invalid member details." }
+        require(snapshot.classes.all { it.id > 0 && it.name.isNotBlank() && it.capacity > 0 }) {
+            "Invalid class details."
+        }
+        require(memberIds.toSet().size == memberIds.size && classIds.toSet().size == classIds.size) {
+            "Duplicate member or class ID."
+        }
+        require(snapshot.nextMemberId > (memberIds.maxOrNull() ?: 0) && snapshot.nextMemberId > 0) {
+            "Invalid next member ID."
+        }
+        require(snapshot.nextClassId > (classIds.maxOrNull() ?: 0) && snapshot.nextClassId > 0) {
+            "Invalid next class ID."
+        }
+        require(snapshot.bookings.toSet().size == snapshot.bookings.size) { "Duplicate booking." }
+        require(snapshot.bookings.all { it.memberId in memberIds && it.classId in classIds }) {
+            "Booking references missing member or class."
+        }
+        val classCapacities = snapshot.classes.associate { it.id to it.capacity }
+        require(snapshot.bookings.groupingBy { it.classId }.eachCount().all { (id, count) ->
+            count <= classCapacities.getValue(id)
+        }) { "Saved class is over capacity." }
+
+        members.clear()
+        classes.clear()
+        bookings.clear()
+        snapshot.members.forEach { members[it.id] = it }
+        snapshot.classes.forEach { classes[it.id] = it }
+        bookings.addAll(snapshot.bookings)
+        nextMemberId = snapshot.nextMemberId
+        nextClassId = snapshot.nextClassId
+    }
+
     fun bookingsForClass(classId: Int): List<Booking> =
         bookings.filter { it.classId == classId }
 
