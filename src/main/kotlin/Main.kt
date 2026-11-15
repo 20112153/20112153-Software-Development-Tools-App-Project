@@ -1,5 +1,6 @@
+import java.nio.file.Path
 import ui.GymConsole
 
 fun main() {
-    GymConsole().run()
+    GymConsole(dataFile = Path.of("data", "gym-data.json")).run()
 }
