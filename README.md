@@ -12,7 +12,7 @@ A small Kotlin command-line application for managing gym members, class sessions
 - JUnit 5 tests for business logic and automated console interaction.
 - Gradle checks, JaCoCo coverage reporting, GitHub Actions and merged-feature-branch cleanup.
 
-**Current limitation:** All data is held **in memory** and is lost when the program exits. This is an intentionally rudimentary console interface, not the final assignment.
+**Persistence:** The application saves JSON to `data/gym-data.json` on exit and loads it at startup. The main menu also offers manual Save/Load. Invalid saved files are rejected without replacing in-memory data; startup stops rather than overwriting corrupt files. This is still a small console application, not the finished assignment.
 
 ## Menu
 
@@ -20,7 +20,9 @@ A small Kotlin command-line application for managing gym members, class sessions
 Gym Class Manager
 1. Members     -> Add / List / Update / Delete
 2. Classes     -> Add / List / Update / Delete
-3. Bookings    -> Book class / List bookings / Cancel booking
+3. Bookings    -> Book class / List bookings / Cancel booking / Move booking
+4. Save to JSON
+5. Load from JSON
 0. Exit
 ```
 
@@ -32,6 +34,8 @@ src/main/kotlin/
   ui/GymConsole.kt          # menu navigation and input/output
   model/                    # Member, ClassSession, Booking
   service/GymService.kt     # data operations and domain rules
+  service/GymSnapshot.kt    # saved state and next-ID counters
+  persistence/GymFileStore.kt # JSON save/load
   utils/UserInput.kt        # console input helper
 src/test/kotlin/
   service/GymServiceTest.kt # service and edge-case tests
@@ -58,7 +62,7 @@ For each change: **create an issue → feature branch → meaningful commit(s) �
 
 ## Planned next iterations
 
-1. Add JSON save/load and tests for correct ID generation after reloading.
+1. JSON save/load completed; improve edge-case coverage when new features are added.
 2. Add search/filter options and useful capacity/attendance reports.
 3. Further improve validation, automated test coverage, Gradle tasks and documentation.
 4. Prepare tagged releases and the short submission video explaining the code and AI-assisted workflow.
@@ -70,3 +74,7 @@ Project structure is inspired by the lecturer-provided Notes App example. The gy
 ## Iteration: booking updates
 
 The booking submenu also supports **Move booking** (option 4). A move is validated before changing the original booking, so full or missing destination classes and duplicate bookings do not lose data. The corresponding service and console tests are included.
+
+## Iteration: JSON persistence
+
+Save files contain member, class and booking lists plus the next-ID counters, so a deleted highest ID is not reused on restart. Saving first writes a temporary file and replaces the old save. Malformed JSON, missing references, invalid capacities and duplicate IDs/bookings are rejected before the service is modified. No database is needed.

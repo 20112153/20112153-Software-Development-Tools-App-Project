@@ -3,6 +3,9 @@ package ui
 import service.BookingResult
 import service.GymService
 import service.RescheduleResult
+import persistence.GymFileStore
+import java.nio.file.Files
+import java.nio.file.Path
 import utils.readText
 
 /**
@@ -12,23 +15,71 @@ import utils.readText
 class GymConsole(
     private val gym: GymService = GymService(),
     private val input: (String) -> String? = ::readText,
-    private val output: (String) -> Unit = ::println
+    private val output: (String) -> Unit = ::println,
+    private val dataFile: Path? = null
 ) {
+    private val storage = GymFileStore()
+
     fun run() {
         output("Gym Class Manager")
+        // If the old file is corrupt, keep it untouched instead of overwriting it on exit.
+        if (dataFile != null && Files.exists(dataFile)) {
+            try {
+                storage.load(dataFile, gym)
+                output("Saved data loaded.")
+            } catch (error: Exception) {
+                output("Could not load saved data: ${error.message}")
+                output("Data file was not changed. Fix it before starting again.")
+                return
+            }
+        }
+        try {
         while (true) {
             output("")
-            output("1. Members  2. Classes  3. Bookings  0. Exit")
+            output("1. Members  2. Classes  3. Bookings  4. Save  5. Load  0. Exit")
             when (ask("Select: ") ?: return) {
                 "1" -> membersMenu()
                 "2" -> classesMenu()
                 "3" -> bookingsMenu()
+                "4" -> saveData()
+                "5" -> loadData()
                 "0" -> {
                     output("Goodbye!")
                     return
                 }
                 else -> output("Invalid option. Please try again.")
             }
+        }
+        } finally {
+            if (dataFile != null) saveData()
+        }
+    }
+
+    private fun saveData() {
+        val path = dataFile
+        if (path == null) {
+            output("Storage is not configured.")
+            return
+        }
+        try {
+            storage.save(path, gym)
+            output("Data saved.")
+        } catch (error: Exception) {
+            output("Could not save data: ${error.message}")
+        }
+    }
+
+    private fun loadData() {
+        val path = dataFile
+        if (path == null) {
+            output("Storage is not configured.")
+            return
+        }
+        try {
+            storage.load(path, gym)
+            output("Data loaded.")
+        } catch (error: Exception) {
+            output("Could not load data: ${error.message}")
         }
     }
 
