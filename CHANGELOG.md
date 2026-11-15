@@ -29,10 +29,12 @@ Generated official Gradle wrapper; checked-in quality tasks and coverage gate; r
 ## v1.0.0 — Documentation and submission-ready code
 **Issue:** #13 · **PR:** linked from issue
 
-Full README, rubric review, AI-use record, submission/video checklist and published GitHub Releases. Tagged from the successful final `main` CI run.
+Full README, rubric review, AI-use record and submission/video checklist. Version `v1.0.0` should be tagged only after the final merged `main` code and tests are verified.
 
 **Note:** The older milestone commits are tagged retrospectively to preserve the genuine chronological source versions, rather than pretending the release tags existed when those commits were first merged.
 
-## GitHub Release publication
+## GitHub tag and Release publication — manual action required
 
-The CI-completion workflow automatically pushes **annotated Git tags** for these milestones after successful builds. The connected GitHub Actions token returned HTTP 403 when trying to create GitHub Release objects; create the corresponding releases manually in GitHub from the existing tags, using the milestone notes above. Tags are still grounded in the actual merged commits.
+**Not yet published through this connection.** Workflow attempts failed: GitHub Release API returned HTTP 403 (run #43717605822); annotated Git tag push was rejected because the installed GitHub App lacks `workflows` permission (run #43718022229). These are authorization restrictions, not app test failures.
+
+The repository owner should create the four historical tags at the exact merge commits above, then `v1.0.0` at the latest verified `main` commit, using [docs/RELEASE_MANUAL.md](docs/RELEASE_MANUAL.md). Publish GitHub Releases from those tags with the milestone notes above.
