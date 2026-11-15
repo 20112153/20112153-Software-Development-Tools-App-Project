@@ -35,3 +35,25 @@ jobs:
           name: junit-test-results
           path: build/test-results/test/
           if-no-files-found: ignore
+
+      # GitHub checkout is the source of truth; package ONLY after all checks pass.
+      - name: Validate release helper script
+        if: success()
+        run: bash -n scripts/publish-releases.sh
+      - name: Package source directly from the checked-out GitHub commit
+        if: success()
+        run: |
+          mkdir -p build/submission
+          git archive --format=zip --prefix=gym-class-manager/ \
+            --output=build/submission/gym-class-manager-source.zip HEAD
+          unzip -t build/submission/gym-class-manager-source.zip > /dev/null
+          (cd build/submission && sha256sum gym-class-manager-source.zip > SHA256SUMS.txt)
+          git rev-parse HEAD > build/submission/SOURCE_COMMIT.txt
+      - name: Upload GitHub source ZIP and verification details
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-source-zip
+          path: build/submission/
+          if-no-files-found: error
+          retention-days: 90

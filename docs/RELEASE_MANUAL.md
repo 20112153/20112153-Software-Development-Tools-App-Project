@@ -2,7 +2,17 @@
 
 **Manual action required:** The connected GitHub App was able to commit, merge and run CI but could not create GitHub Releases (HTTP 403) or push version tags containing workflow history (missing `workflows` permission). No tags or Release objects were verified as published by the automation.
 
-## 1. Create annotated tags using your own Git account
+## 1. Fastest safe method (Windows Git Bash)
+
+From a fresh clone with **Git** and the **GitHub CLI** installed, authenticate `gh auth login`, then run:
+
+```bash
+bash scripts/publish-releases.sh
+```
+
+The helper verifies it is in this exact repository on clean, up-to-date `main`, checks existing tags instead of overwriting them, creates annotated historical tags at verified milestone commits, pushes them and publishes the corresponding Releases with your authenticated owner account. It requires a GitHub user who actually has permission to write tags and Releases. If permission is denied, stop and use your GitHub account's token/permissions or the manual UI method below.
+
+## 2. Manual alternative: create annotated tags using your own Git account
 
 Use an authenticated terminal with Git installed, or open a terminal in your local clone:
 
@@ -22,7 +32,7 @@ git push origin v0.1.0 v0.2.0 v0.3.0 v0.4.0 v1.0.0
 
 If any tag already exists, **inspect it first** with `git show --no-patch v0.1.0` and do not overwrite tags. Only run the above after the final `main` build passes. The historical SHA values are actual merged milestones; `v1.0.0` should refer to the current final `main` head.
 
-## 2. Publish Release objects on GitHub
+## 3. Publish Release objects on GitHub
 
 1. Open the repository's **Releases** page.
 2. Select **Draft a new release**.
@@ -32,7 +42,7 @@ If any tag already exists, **inspect it first** with `git show --no-patch v0.1.0
 
 Check that five Releases are visible. No other app-code changes are needed to publish Releases.
 
-## 3. Validate and submit
+## 4. Validate and submit
 
 Confirm release versions and commit targets in GitHub, invite/verify the lecturer's `sdronan` account, then download the **final GitHub source ZIP** and record the code/AI-process video under 10 minutes. The requirements are summarised in [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md).
 
