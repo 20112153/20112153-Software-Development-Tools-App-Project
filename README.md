@@ -1,34 +1,48 @@
 # Gym Class Manager (Kotlin)
 
-A small Kotlin command-line application for managing gym members, class sessions and bookings. This is the **starting framework**, not a completed assignment. It is based on the layering approach of the course Notes App, but uses a different domain and an explicit many-to-many relationship.
+A small Kotlin command-line application for managing gym members, class sessions and bookings. It follows the layered structure of the course Notes App, with its own domain and a many-to-many relationship.
 
-## Current features (v0.1.0 starter)
+## Current features
 
-- In-memory CRUD for members and class sessions in `GymService`.
-- Many-to-many bookings: one member can book many classes and one class can have many members.
-- Create/cancel bookings, reject duplicate bookings, enforce class capacity and clean up bookings when linked records are deleted.
-- Basic console entry point to add and view records and create bookings.
-- JUnit 5 tests covering normal paths and errors.
-- GitHub Actions for Gradle build, tests, structural verification, JaCoCo coverage and deletion of merged feature branches.
+- Member menu: add, list, update and delete members.
+- Class menu: add, list, update and delete classes, including booked/available capacity.
+- Booking menu: create, list and cancel class bookings.
+- Booking constraints in `GymService`: no duplicate bookings, no overbooking, valid references only, and automatic cleanup of bookings when members or classes are deleted.
+- Basic input validation, friendly messages, and confirmation before deleting members or classes.
+- JUnit 5 tests for business logic and automated console interaction.
+- Gradle checks, JaCoCo coverage reporting, GitHub Actions and merged-feature-branch cleanup.
 
-**Not implemented yet:** full console CRUD menus, filtering, reports, JSON saving/loading, and final UX improvements. Track these as separate GitHub issues and pull requests.
+**Current limitation:** All data is held **in memory** and is lost when the program exits. This is an intentionally rudimentary console interface, not the final assignment.
+
+## Menu
+
+```text
+Gym Class Manager
+1. Members     -> Add / List / Update / Delete
+2. Classes     -> Add / List / Update / Delete
+3. Bookings    -> Book class / List bookings / Cancel booking
+0. Exit
+```
 
 ## Project layout
 
 ```text
 src/main/kotlin/
-  Main.kt                   # simple console UI
+  Main.kt                   # starts the console application
+  ui/GymConsole.kt          # menu navigation and input/output
   model/                    # Member, ClassSession, Booking
-  service/GymService.kt     # domain rules and CRUD
-  utils/UserInput.kt        # console input handling
-src/test/kotlin/service/    # JUnit tests
-.github/workflows/gradle.yml
+  service/GymService.kt     # data operations and domain rules
+  utils/UserInput.kt        # console input helper
+src/test/kotlin/
+  service/GymServiceTest.kt # service and edge-case tests
+  ui/GymConsoleTest.kt      # menu interaction tests
+.github/workflows/          # build/test and branch-cleanup workflows
 build.gradle.kts
 ```
 
 ## Running and testing
 
-Requires **JDK 21** and **Gradle 9.3.0**. Import the project in IntelliJ IDEA as a Gradle project or use an installed Gradle CLI:
+Requires JDK 21 and Gradle 9.3.0. Open in IntelliJ as a Gradle project, or run:
 
 ```bash
 gradle run
@@ -36,19 +50,19 @@ gradle check
 gradle jacocoTestReport
 ```
 
-The coverage report is generated under `build/reports/jacoco/test/html/`. GitHub Actions installs Gradle automatically. The Gradle wrapper from the reference ZIP is not included in this initial GitHub upload: add a generated wrapper with IntelliJ/`gradle wrapper` in a dedicated follow-up issue, or use Gradle 9.3.0 directly.
+Coverage is generated in `build/reports/jacoco/test/html/`. GitHub Actions installs Gradle automatically. The project does not yet contain a Gradle wrapper, which can be added in a separate issue.
 
-## Workflow required for the assignment
+## Assignment GitHub workflow
 
-For every feature: **Issue → feature branch → meaningful commits → pull request with `Closes #issue` → merge → confirm issue closed → delete remote branch**. Use multiple labelled/tagged releases as the application develops, maintain this README, and demonstrate code and AI-assisted development in the submission video.
+For each change: **create an issue → feature branch → meaningful commit(s) → PR referencing the issue → pass CI → merge → confirm issue closed → delete the merged branch**. Tag multiple releases during development and keep the README up to date.
 
-## Planned iterations
+## Planned next iterations
 
-1. Complete interactive menus for member/class/booking CRUD and input validation.
-2. Add JSON persistence and test ID continuity after reloading.
-3. Add searching, filtering, attendance/capacity reports and edge-case tests.
-4. Polish documentation, coverage thresholds and release notes.
+1. Add JSON save/load and tests for correct ID generation after reloading.
+2. Add search/filter options and useful capacity/attendance reports.
+3. Further improve validation, automated test coverage, Gradle tasks and documentation.
+4. Prepare tagged releases and the short submission video explaining the code and AI-assisted workflow.
 
 ## Attribution and AI use
 
-Initial structure draws on the lecturer-provided Notes App example (Kotlin source layout, Gradle and console utilities). The Gym Class Manager domain, models, booking logic and tests are independently adapted. AI assisted with planning and preparing the starter files; generated code should be reviewed, run and explained by the student.
+Project structure is inspired by the lecturer-provided Notes App example. The gym domain, many-to-many booking logic, menus and tests are adapted specifically for this project. AI assisted in preparing the code and testing plan; the student should review, test and be able to explain the implementation.
