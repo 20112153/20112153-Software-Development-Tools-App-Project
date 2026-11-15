@@ -4,7 +4,7 @@ The lecturer's submission slide asks for **(a)** one ZIP containing source code 
 
 ## Before submitting
 
-- [ ] Open the final `main` branch and confirm the latest **Kotlin Build and Tests** GitHub Actions run passed.
+- [ ] Open the final `main` branch and confirm the latest **Kotlin Build and Tests** GitHub Actions run passed. The independent audit's verified baseline was [run #43721606288](https://github.com/20112153/20112153-Software-Development-Tools-App-Project/actions/runs/43721606288): 41 tests, 89% instruction / 75% branch coverage; check the current run as well.
 - [ ] **Create annotated Git tags** `v0.1.0` through `v1.0.0` using [Manual Release Instructions](RELEASE_MANUAL.md), then verify each points to the intended commit. The connected GitHub App cannot create them.
 - [ ] **Publish GitHub Releases manually**: open **Releases → Draft a new release**, select each tag, use the matching notes from `CHANGELOG.md`, and click **Publish release**. GitHub API and tag-push attempts failed due missing integration permissions.
 - [ ] In GitHub **Settings → Collaborators / Access**, invite or verify lecturer **sdronan**; the brief specifies Week 8. A pending invitation may require acceptance.

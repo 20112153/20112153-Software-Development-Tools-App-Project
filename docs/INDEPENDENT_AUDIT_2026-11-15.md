@@ -46,3 +46,24 @@ The lecturer's Notes App reference has Kotlin `2.3.21`, Gradle wrapper `9.3.0`, 
 ## What this audit cannot claim
 
 No grade is guaranteed; the work was not tested against missing Gradle lab task sheets, the collaborator invitation could not be verified, tags/releases had not been published, and the owner must still personally understand and present the code.
+
+## Final confirmation after independent audit changes
+
+PR #20 / Issue #19 implemented the revised Gradle smoke test, stronger coverage thresholds and extra regression tests. A first PR build failed due a Gradle Kotlin DSL `java.io` import collision; the error was corrected on the feature branch, rerun and **passed before merge**.
+
+The post-merge build on `main` (commit `2ebc8e72088971918785cf66487fc19eca3afe18`, run `43721606288`) succeeded. I downloaded and parsed the final CI artifacts:
+
+| Verified measurement | Value |
+| --- | --- |
+| JUnit test classes | 13 |
+| JUnit test methods | **41** |
+| Failures / Errors / Skips | **0 / 0 / 0** |
+| Overall JaCoCo instruction coverage | **89%** |
+| Overall JaCoCo branch coverage | **75%** |
+| Business service instruction/branch | **96% / 85%** |
+| Persistence instruction/branch | **93% / 82%** |
+| UI instruction/branch | **82% / 67%** |
+| Gradle quality gate | >=80% instruction; >=70% branches |
+| App console smoke task | **Passed as part of Gradle check** |
+
+GitHub additionally showed all **10 implementation/QA feature issues closed**, their **10 associated PRs merged** and only the `main` remote branch remaining at that checkpoint. Tags, Releases and lecturer access remain unconfirmed/missing as specified above. Individual Gradle lab sheets are still unavailable; a complete compliance guarantee would be unfounded.

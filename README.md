@@ -58,6 +58,8 @@ The data layer and rules are separate from the console menu. Booking links are r
 
 Tests cover CRUD, missing/invalid IDs, capacity limits, duplicate bookings, moving a booking, JSON reload and counter continuity, malformed JSON, safe console input, reports and a complete console-to-JSON restart flow.
 
+**Independently verified 15 November 2026:** [post-audit main build #43721606288](https://github.com/20112153/20112153-Software-Development-Tools-App-Project/actions/runs/43721606288) produced **41 passing JUnit tests, 0 failures/errors/skips, 89% instruction coverage and 75% branch coverage**. Measurements come from downloaded JUnit XML and JaCoCo HTML artifacts, not an estimate.
+
 ## GitHub workflow and releases
 
 Each iteration uses **issue → feature branch → meaningful commit(s) → pull request referencing issue → CI → merge → issue closes → delete branch**. Versions and the corresponding milestone commits are documented in [CHANGELOG.md](CHANGELOG.md). The connected GitHub App cannot publish annotated Git tags or Release objects because its token lacks required workflow/release permissions. **Tags and Releases are not yet published**. See [Manual Release Instructions](docs/RELEASE_MANUAL.md) for the owner's short, verified milestone-tag commands and GitHub UI publication steps.
