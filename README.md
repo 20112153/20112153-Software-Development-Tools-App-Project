@@ -60,7 +60,7 @@ Tests cover CRUD, missing/invalid IDs, capacity limits, duplicate bookings, movi
 
 ## GitHub workflow and releases
 
-Each iteration uses **issue → feature branch → meaningful commit(s) → pull request referencing issue → CI → merge → issue closes → delete branch**. Versions and the corresponding milestone commits are documented in [CHANGELOG.md](CHANGELOG.md). Annotated Git tags are created after passing CI. Because the GitHub Actions token cannot create Release objects (HTTP 403), publish Releases manually from those tags as described in the submission checklist.
+Each iteration uses **issue → feature branch → meaningful commit(s) → pull request referencing issue → CI → merge → issue closes → delete branch**. Versions and the corresponding milestone commits are documented in [CHANGELOG.md](CHANGELOG.md). The connected GitHub App cannot publish annotated Git tags or Release objects because its token lacks required workflow/release permissions. **Tags and Releases are not yet published**. See [Manual Release Instructions](docs/RELEASE_MANUAL.md) for the owner's short, verified milestone-tag commands and GitHub UI publication steps.
 
 ## Submission and AI assistance
 

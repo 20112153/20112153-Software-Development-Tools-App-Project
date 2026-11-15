@@ -25,3 +25,7 @@ This file describes AI involvement transparently for the assignment's required c
 
 ## Honest limits
 AI-assisted work does not imply that the student wrote or manually verified every line. The student is responsible for understanding and explaining the final submission and checking any lecturer-specific lab requirements not in the supplied brief.
+
+## GitHub permission boundary discovered during review
+
+Automated GitHub Release publication returned HTTP 403 and annotated tag push was rejected because the installed GitHub App lacked permission to update workflow refs. Failed workflows were inspected, and the release automation was removed rather than reporting unverified success. The student should create tags and Releases using their own authorized GitHub session as instructed in `docs/RELEASE_MANUAL.md`.
