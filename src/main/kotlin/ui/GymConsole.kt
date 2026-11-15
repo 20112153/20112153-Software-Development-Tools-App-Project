@@ -19,6 +19,7 @@ class GymConsole(
     private val dataFile: Path? = null
 ) {
     private val storage = GymFileStore()
+    private var autoSaveEnabled = true
 
     fun run() {
         output("Gym Class Manager")
@@ -52,7 +53,7 @@ class GymConsole(
             }
         }
         } finally {
-            if (dataFile != null) saveData()
+            if (dataFile != null && autoSaveEnabled) saveData()
         }
     }
 
@@ -64,6 +65,7 @@ class GymConsole(
         }
         try {
             storage.save(path, gym)
+            autoSaveEnabled = true
             output("Data saved.")
         } catch (error: Exception) {
             output("Could not save data: ${error.message}")
@@ -81,6 +83,10 @@ class GymConsole(
             output("Data loaded.")
         } catch (error: Exception) {
             output("Could not load data: ${error.message}")
+            if (Files.exists(path)) {
+                autoSaveEnabled = false
+                output("Autosave disabled to protect the existing file. Use Save to overwrite it explicitly.")
+            }
         }
     }
 
