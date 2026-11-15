@@ -31,7 +31,7 @@ Generated official Gradle wrapper; checked-in quality tasks and coverage gate; r
 
 Full README, rubric review, AI-use record and submission/video checklist. Version `v1.0.0` should be tagged only after the final merged `main` code and tests are verified.
 
-**Note:** The older milestone commits are tagged retrospectively to preserve the genuine chronological source versions, rather than pretending the release tags existed when those commits were first merged.
+**Note:** Tag the historical merged milestone commits retrospectively using the instructions below; do not imply that these tags existed when the work was first merged.
 
 ## GitHub tag and Release publication — manual action required
 
