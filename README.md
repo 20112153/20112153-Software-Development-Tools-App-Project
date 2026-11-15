@@ -1,54 +1,21 @@
-# Gym Class Manager (Kotlin)
+# Gym Class Manager
 
-A small Kotlin command-line application for managing gym members, class sessions and bookings. It follows the layered structure of the course Notes App, with its own domain and a many-to-many relationship.
+A Kotlin console application for managing **gym members, class sessions and bookings**. Built as a second-year Software Development Tools assignment using the layered architecture from the course Notes App as a reference.
 
-## Current features
+## Features
 
-- Member menu: add, list, update and delete members.
-- Class menu: add, list, update and delete classes, including booked/available capacity.
-- Booking menu: create, list, move and cancel class bookings.
-- Booking constraints in `GymService`: no duplicate bookings, no overbooking, valid references only, and automatic cleanup of bookings when members or classes are deleted.
-- Member/class search, available-class filtering, class attendance and member booking-count reports.
-- Basic input validation, friendly messages, and confirmation before deleting members or classes.
-- JUnit 5 tests for business logic and automated console interaction.
-- Gradle checks, JaCoCo coverage reporting, GitHub Actions and merged-feature-branch cleanup.
+- **Members:** add, list, update and delete.
+- **Classes:** add, list, update and delete, with capacity validation.
+- **Bookings (many-to-many):** create, list, move to a different class and cancel. A member may book several classes; a class may contain several members. Invalid and duplicate bookings, full classes and unsafe moves are rejected.
+- **Search/filter:** find members and classes by case-insensitive name; find classes with spaces.
+- **Reports:** booked/capacity/free counts per class and booking totals per member.
+- **JSON storage:** loads on startup, saves on normal exit, and offers manual Save/Load. Saved files preserve next-ID counters; corrupt files are rejected without changing the current in-memory data. Startup will not overwrite an invalid existing save.
 
-**Persistence:** The application saves JSON to `data/gym-data.json` on exit and loads it at startup. The main menu also offers manual Save/Load. Invalid saved files are rejected without replacing in-memory data; startup stops rather than overwriting corrupt files. This is still a small console application, not the finished assignment.
+Data is stored locally at `data/gym-data.json`. It is not an online or multi-user application.
 
-## Menu
+## Run
 
-```text
-Gym Class Manager
-1. Members     -> Add / List / Update / Delete
-2. Classes     -> Add / List / Update / Delete
-3. Bookings    -> Book class / List bookings / Cancel booking / Move booking
-4. Save to JSON
-5. Load from JSON
-6. Search / Reports -> Name search / Spaces filter / Attendance summaries
-0. Exit
-```
-
-## Project layout
-
-```text
-src/main/kotlin/
-  Main.kt                   # starts the console application
-  ui/GymConsole.kt          # menu navigation and input/output
-  model/                    # Member, ClassSession, Booking
-  service/GymService.kt     # data operations and domain rules
-  service/GymSnapshot.kt    # saved state and next-ID counters
-  persistence/GymFileStore.kt # JSON save/load
-  utils/UserInput.kt        # console input helper
-src/test/kotlin/
-  service/GymServiceTest.kt # service and edge-case tests
-  ui/GymConsoleTest.kt      # menu interaction tests
-.github/workflows/          # build/test and branch-cleanup workflows
-build.gradle.kts
-```
-
-## Running and testing
-
-Requires JDK 21. The repository includes the official Gradle 9.3.0 wrapper. Open in IntelliJ as a Gradle project, or run:
+Requires **JDK 21**. The Gradle 9.3.0 wrapper is included.
 
 ```bash
 ./gradlew run
@@ -56,35 +23,53 @@ Requires JDK 21. The repository includes the official Gradle 9.3.0 wrapper. Open
 ./gradlew jacocoTestReport
 ```
 
-Coverage is generated in `build/reports/jacoco/test/html/`. `check` also runs `verifyProjectStructure`, `verifyDocumentation` and `jacocoTestCoverageVerification` (65% minimum coverage), with results uploaded by GitHub Actions. On Windows use `gradlew.bat` instead of `./gradlew`.
+On Windows, use `gradlew.bat run` / `gradlew.bat check`. You can also import the project as a Gradle project in IntelliJ IDEA.
 
-## Assignment GitHub workflow
+### Menu
 
-For each change: **create an issue → feature branch → meaningful commit(s) → PR referencing the issue → pass CI → merge → confirm issue closed → delete the merged branch**. Tag multiple releases during development and keep the README up to date.
+```text
+1. Members          Add / List / Update / Delete
+2. Classes          Add / List / Update / Delete
+3. Bookings         Book / List / Cancel / Move
+4. Save             Save JSON now
+5. Load             Load JSON now
+6. Search / Reports Search names, free spaces, attendance figures
+0. Exit             Automatically saves JSON
+```
 
-## Planned next iterations
+## How the code is organised
 
-1. JSON save/load completed; improve edge-case coverage when new features are added.
-2. Searching, capacity filtering and attendance reports completed.
-3. Further improve validation, automated test coverage, Gradle tasks and documentation.
-4. Prepare tagged releases and the short submission video explaining the code and AI-assisted workflow.
+| Location | Responsibility |
+| --- | --- |
+| `model/` | `Member`, `ClassSession` and `Booking` data classes |
+| `service/GymService.kt` | Business rules, full CRUD, search/filter/reports |
+| `service/GymSnapshot.kt` | Validated state that can be restored from a file |
+| `service/GymReports.kt` | Derived class/member reports |
+| `persistence/GymFileStore.kt` | JSON save/load with temporary-file replacement |
+| `ui/GymConsole.kt` | Console input/output and menus |
+| `utils/UserInput.kt` | Simple console input helpers |
+| `src/test/kotlin/` | JUnit tests for service, menus, persistence and edge cases |
 
-## Attribution and AI use
+The data layer and rules are separate from the console menu. Booking links are represented by `Booking(memberId, classId)`, creating the required many-to-many relationship.
 
-Project structure is inspired by the lecturer-provided Notes App example. The gym domain, many-to-many booking logic, menus and tests are adapted specifically for this project. AI assisted in preparing the code and testing plan; the student should review, test and be able to explain the implementation.
+## Testing and automation
 
-## Iteration: booking updates
+`./gradlew check` runs JUnit and the additional tasks **verifyProjectStructure**, **verifyDocumentation**, and **jacocoTestCoverageVerification**. The coverage gate is **65% minimum**; `jacocoTestReport` generates HTML/XML reports under `build/reports/jacoco/test/`. GitHub Actions runs the same wrapper and uploads test/coverage artifacts on every PR and push to `main`.
 
-The booking submenu also supports **Move booking** (option 4). A move is validated before changing the original booking, so full or missing destination classes and duplicate bookings do not lose data. The corresponding service and console tests are included.
+Tests cover CRUD, missing/invalid IDs, capacity limits, duplicate bookings, moving a booking, JSON reload and counter continuity, malformed JSON, safe console input and searches/reports.
 
-## Iteration: JSON persistence
+## GitHub workflow and releases
 
-Save files contain member, class and booking lists plus the next-ID counters, so a deleted highest ID is not reused on restart. Saving first writes a temporary file and replaces the old save. Malformed JSON, missing references, invalid capacities and duplicate IDs/bookings are rejected before the service is modified. No database is needed.
+Each iteration uses **issue → feature branch → meaningful commit(s) → pull request referencing issue → CI → merge → issue closes → delete branch**. Versions and the corresponding milestone commits are documented in [CHANGELOG.md](CHANGELOG.md); GitHub Releases provides tagged source snapshots.
 
-## Iteration: searching and reports
+## Submission and AI assistance
 
-Use main-menu option 6 to search by a case-insensitive part of a name, list classes with free spaces, see booked/capacity totals, and count bookings for each member. These reports are calculated from current bookings, so cancellations and reschedules update them automatically. Blank searches are rejected; empty results are handled.
+Read [Submission Checklist](docs/SUBMISSION_CHECKLIST.md), [Rubric Review](docs/RUBRIC_REVIEW.md) and [AI Development Record](docs/AI_DEVELOPMENT.md). The submission instructions require a **GitHub-downloaded ZIP** and a **video of no more than 10 minutes** walking through the code and AI development process (not a GitHub tour). Confirm lecturer `sdronan` has repository access.
 
-## Iteration: build and testing improvements
+## Known limits
 
-The repository uses the Gradle wrapper generated by Gradle 9.3.0. Running `./gradlew check` verifies project structure, README topics and a JaCoCo minimum coverage level, in addition to JUnit tests. CI runs the same wrapper and uploads test and coverage reports. Regression tests also check malformed JSON, ID overflow and safe booking updates. Manual Load failures protect the existing file from unintended autosaving; selecting Save is an explicit override.
+This is intentionally a **console application** with local JSON, not a GUI or database. It does not include an attendance date/time scheduler, authentication or multi-user synchronization. The supplied assignment excerpt does not include every Gradle lab task, so those lab-specific requirements must be checked separately.
+
+## Attribution
+
+The lecturer-supplied `notes-app-4.0.zip` was used as an architectural example. The gym domain, models, booking/service rules and reports were developed for this project. AI assisted with project planning, source preparation, test design, code review and GitHub workflow execution; see the AI development record for details.

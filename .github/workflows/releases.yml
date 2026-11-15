@@ -1,0 +1,41 @@
+name: Publish milestone releases
+
+# A release is published only when the normal build/tests pass on main.
+on:
+  workflow_run:
+    workflows: ["Kotlin Build and Tests"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      MAIN_SHA: ${{ github.event.workflow_run.head_sha }}
+    steps:
+      - name: Create milestone tags and releases (idempotent)
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_if_missing() {
+            tag="$1"
+            sha="$2"
+            title="$3"
+            notes="$4"
+            if gh release view "$tag" --repo "$GH_REPO" >/dev/null 2>&1; then
+              echo "$tag already exists"
+            else
+              gh release create "$tag" --repo "$GH_REPO" --target "$sha" --title "$title" --notes "$notes"
+            fi
+          }
+          release_if_missing "v0.1.0" "2501ca0d95256041da4cf7e4e6b2c09b38034760"             "v0.1.0 - Starter framework"             "Initial Gym Class Manager models, CRUD service, Gradle/JUnit, GitHub Actions and README. Foundation: issue #1, PR #2."
+          release_if_missing "v0.2.0" "77d3351b3efd7a57c601153ed7f41d15d9ff0991"             "v0.2.0 - Menus, bookings and JSON"             "Interactive console menus, safe booking rescheduling, and JSON persistence with validation and ID continuity. Issues #3, #5, #7; PRs #4, #6, #8."
+          release_if_missing "v0.3.0" "9a2cdacc3869fabcec6911480ad2aaeb28110c77"             "v0.3.0 - Search and reports"             "Member/class name search, available-space filter and class/member attendance reports. Issue #9, PR #10."
+          release_if_missing "v0.4.0" "098c4b06639876b723b73a256aee4d9cda9afce5"             "v0.4.0 - Gradle and test quality"             "Official Gradle wrapper, extra verification tasks, enforced JaCoCo coverage and regression testing. Issue #11, PR #12."
+          release_if_missing "v1.0.0" "$MAIN_SHA"             "v1.0.0 - Assignment-ready codebase"             "Documented Kotlin Gym Class Manager with many-to-many CRUD, persistence, search/filter/reporting, JUnit tests, Gradle quality checks and GitHub workflow evidence. Review docs/SUBMISSION_CHECKLIST.md before submitting."
