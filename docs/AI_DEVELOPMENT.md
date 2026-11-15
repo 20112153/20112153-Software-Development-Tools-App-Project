@@ -29,3 +29,7 @@ AI-assisted work does not imply that the student wrote or manually verified ever
 ## GitHub permission boundary discovered during review
 
 Automated GitHub Release publication returned HTTP 403 and annotated tag push was rejected because the installed GitHub App lacked permission to update workflow refs. Failed workflows were inspected, and the release automation was removed rather than reporting unverified success. The student should create tags and Releases using their own authorized GitHub session as instructed in `docs/RELEASE_MANUAL.md`.
+
+## Independent evidence review (15 November 2026)
+
+Downloaded the passing GitHub Actions JUnit/JaCoCo artifacts rather than relying only on the green job badge: 39 passing tests, 87% instruction coverage, 73% branch coverage before this audit. Added deeper validation/regression tests and an end-to-end Gradle console smoke task in a separate traceable issue/PR. Original lab handouts remain unavailable, so do not present the overall Gradle rubric as independently certified. No GitHub release tags or confirmed lecturer collaborator permission were observed during the audit.

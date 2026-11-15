@@ -75,12 +75,49 @@ tasks.jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = "0.65".toBigDecimal()
+                counter = "INSTRUCTION"
+                minimum = "0.80".toBigDecimal()
+            }
+            limit {
+                counter = "BRANCH"
+                minimum = "0.70".toBigDecimal()
             }
         }
     }
 }
 
+/**
+ * Runs the REAL console entry point with scripted input in a disposable build directory.
+ * Confirms that startup, menu input, bookings and JSON autosave work together.
+ */
+tasks.register<JavaExec>("verifyConsoleSmoke") {
+    group = "verification"
+    description = "Exercises the console entry point and checks the saved JSON data."
+    dependsOn(tasks.named("classes"))
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("MainKt")
+    workingDir = layout.buildDirectory.dir("console-smoke").get().asFile
+    standardInput = java.io.ByteArrayInputStream(
+        "1\\n1\\nAlex\\n0\\n2\\n1\\nYoga\\n2\\n0\\n3\\n1\\n1\\n1\\n0\\n0\\n".toByteArray()
+    )
+    doFirst {
+        workingDir.mkdirs()
+        workingDir.resolve("data/gym-data.json").delete()
+    }
+    doLast {
+        val saveFile = workingDir.resolve("data/gym-data.json")
+        check(saveFile.isFile) { "Console did not save a JSON file." }
+        val json = saveFile.readText()
+        listOf("\"members\"", "\"classes\"", "\"bookings\"", "Alex", "Yoga").forEach { value ->
+            check(value in json) { "Console smoke test did not save expected value: $value" }
+        }
+        println("Console smoke test passed and JSON was written.")
+    }
+}
+
 tasks.named("check") {
-    dependsOn("verifyProjectStructure", "verifyDocumentation", "jacocoTestCoverageVerification")
+    dependsOn(
+        "verifyProjectStructure", "verifyDocumentation",
+        "verifyConsoleSmoke", "jacocoTestCoverageVerification"
+    )
 }
