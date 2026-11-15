@@ -13,23 +13,8 @@ The lecturer's submission slide asks for **(a)** one ZIP containing source code 
 - [ ] Demonstrate CRUD, invalid booking, safe booking move, JSON save/load and at least one report.
 - [ ] In IntelliJ, follow the lecturer's final local branch cleanup: **Git → Fetch → Checkout main → delete the old local feature branch**, and check the merged commits remain visible. Remote branch deletion was already automated.
 - [ ] Download exactly **one final source ZIP** from GitHub's **Code → Download ZIP** while on `main` (the literal method in the lecturer's submission brief). Alternatively, from the latest successful main Actions run, download `github-source-zip`, extract **only** the contained `gym-class-manager-source.zip`, verify `SOURCE_COMMIT.txt`, and confirm with the lecturer if the Actions-produced GitHub archive is acceptable. Do **not** submit the outer artifact archive, build outputs or an old feature-branch ZIP.
-- [ ] Record your own **under-10-minute** code-and-AI-process video using [Video Walkthrough Guide](VIDEO_WALKTHROUGH_GUIDE.md), without a GitHub tour; upload/link it as Moodle requires.
+- [ ] Independently record your own video (maximum 10 minutes) walking through the codebase and AI development process, **without a GitHub tour**; upload/link it as Moodle requires.
 - [ ] Submit both source ZIP and video link before the deadline.
-
-## Suggested video structure
-
-| Time (approx.) | What to demonstrate |
-| --- | --- |
-| 0:00–0:50 | Purpose of the app, Kotlin and console design |
-| 0:50–2:15 | `Member`, `ClassSession`, `Booking` models and many-to-many links |
-| 2:15–4:10 | `GymService`: CRUD, safe rescheduling, full-class and duplicate rules |
-| 4:10–5:30 | Menu interactions and searches/reports |
-| 5:30–6:30 | `GymFileStore`, valid JSON reload and malformed-data handling |
-| 6:30–8:15 | Show JUnit tests, Gradle extra tasks and JaCoCo coverage in code |
-| 8:15–9:40 | Explain AI assistance, how tests checked the output, lessons learned |
-| 9:40–10:00 | Summary of strengths and acknowledged limitations |
-
-**Do not spend the video navigating GitHub pages.** Discuss the development workflow and AI process verbally while walking through code and tests, as the brief asks.
 
 ## Known manual actions
 
