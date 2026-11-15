@@ -88,6 +88,28 @@ class GymService {
     fun cancelBooking(memberId: Int, classId: Int): Boolean =
         bookings.remove(Booking(memberId, classId))
 
+    fun searchMembers(term: String): List<Member> {
+        require(term.isNotBlank()) { "Enter a search term." }
+        return members.values.filter { it.name.contains(term.trim(), ignoreCase = true) }
+    }
+
+    fun searchClasses(term: String): List<ClassSession> {
+        require(term.isNotBlank()) { "Enter a search term." }
+        return classes.values.filter { it.name.contains(term.trim(), ignoreCase = true) }
+    }
+
+    fun classAttendance(): List<ClassAttendance> {
+        val counts = bookings.groupingBy { it.classId }.eachCount()
+        return classes.values.map { ClassAttendance(it.id, it.name, counts[it.id] ?: 0, it.capacity) }
+    }
+
+    fun classesWithSpace(): List<ClassAttendance> = classAttendance().filter { it.remaining > 0 }
+
+    fun memberBookingCounts(): List<MemberBookingCount> {
+        val counts = bookings.groupingBy { it.memberId }.eachCount()
+        return members.values.map { MemberBookingCount(it.id, it.name, counts[it.id] ?: 0) }
+    }
+
     /** A portable copy of all data, including counters after deletions. */
     fun snapshot(): GymSnapshot = GymSnapshot(
         members = listMembers(),

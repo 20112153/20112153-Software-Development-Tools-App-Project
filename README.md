@@ -6,8 +6,9 @@ A small Kotlin command-line application for managing gym members, class sessions
 
 - Member menu: add, list, update and delete members.
 - Class menu: add, list, update and delete classes, including booked/available capacity.
-- Booking menu: create, list and cancel class bookings.
+- Booking menu: create, list, move and cancel class bookings.
 - Booking constraints in `GymService`: no duplicate bookings, no overbooking, valid references only, and automatic cleanup of bookings when members or classes are deleted.
+- Member/class search, available-class filtering, class attendance and member booking-count reports.
 - Basic input validation, friendly messages, and confirmation before deleting members or classes.
 - JUnit 5 tests for business logic and automated console interaction.
 - Gradle checks, JaCoCo coverage reporting, GitHub Actions and merged-feature-branch cleanup.
@@ -23,6 +24,7 @@ Gym Class Manager
 3. Bookings    -> Book class / List bookings / Cancel booking / Move booking
 4. Save to JSON
 5. Load from JSON
+6. Search / Reports -> Name search / Spaces filter / Attendance summaries
 0. Exit
 ```
 
@@ -78,3 +80,7 @@ The booking submenu also supports **Move booking** (option 4). A move is validat
 ## Iteration: JSON persistence
 
 Save files contain member, class and booking lists plus the next-ID counters, so a deleted highest ID is not reused on restart. Saving first writes a temporary file and replaces the old save. Malformed JSON, missing references, invalid capacities and duplicate IDs/bookings are rejected before the service is modified. No database is needed.
+
+## Iteration: searching and reports
+
+Use main-menu option 6 to search by a case-insensitive part of a name, list classes with free spaces, see booked/capacity totals, and count bookings for each member. These reports are calculated from current bookings, so cancellations and reschedules update them automatically. Blank searches are rejected; empty results are handled.
