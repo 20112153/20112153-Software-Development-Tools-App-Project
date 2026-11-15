@@ -8,7 +8,7 @@ A Kotlin console application for managing **gym members, class sessions and book
 - **Classes:** add, list, update and delete, with capacity validation.
 - **Bookings (many-to-many):** create, list, move to a different class and cancel. A member may book several classes; a class may contain several members. Invalid and duplicate bookings, full classes and unsafe moves are rejected.
 - **Search/filter:** find members and classes by case-insensitive name; find classes with spaces.
-- **Reports:** booked/capacity/free counts per class and booking totals per member.
+- **Reports:** booked/capacity/free counts per class and booking totals per member. These represent bookings, not verified physical attendance.
 - **JSON storage:** loads on startup, saves on normal exit, and offers manual Save/Load. Saved files preserve next-ID counters; corrupt files are rejected without changing the current in-memory data. Startup will not overwrite an invalid existing save.
 
 Data is stored locally at `data/gym-data.json`. It is not an online or multi-user application.
@@ -33,7 +33,7 @@ On Windows, use `gradlew.bat run` / `gradlew.bat check`. You can also import the
 3. Bookings         Book / List / Cancel / Move
 4. Save             Save JSON now
 5. Load             Load JSON now
-6. Search / Reports Search names, free spaces, attendance figures
+6. Search / Reports Search names, free spaces, booking totals
 0. Exit             Automatically saves JSON
 ```
 
@@ -66,7 +66,7 @@ Each iteration uses **issue → feature branch → meaningful commit(s) → pull
 
 ## Submission and AI assistance
 
-Read [Submission Checklist](docs/SUBMISSION_CHECKLIST.md), [Rubric Review](docs/RUBRIC_REVIEW.md), [Independent Audit](docs/INDEPENDENT_AUDIT_2026-11-15.md), and [AI Development Record](docs/AI_DEVELOPMENT.md). The submission instructions require a **GitHub-downloaded ZIP** and a **video of no more than 10 minutes** walking through the code and AI development process (not a GitHub tour). Confirm lecturer `sdronan` has repository access.
+Read [Submission Checklist](docs/SUBMISSION_CHECKLIST.md), [Rubric Review](docs/RUBRIC_REVIEW.md), [Independent Audit](docs/INDEPENDENT_AUDIT_2026-11-15.md), [Test Matrix](docs/TEST_MATRIX.md), and [AI Development Record](docs/AI_DEVELOPMENT.md). The submission instructions require a **GitHub-downloaded ZIP** and a **video of no more than 10 minutes** walking through the code and AI development process (not a GitHub tour). Confirm lecturer `sdronan` has repository access.
 
 ## Known limits
 

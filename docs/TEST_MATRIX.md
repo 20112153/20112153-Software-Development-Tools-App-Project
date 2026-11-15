@@ -18,7 +18,7 @@ Prepared from the **actual App rubric and GitHub Workflow slides**, the original
 | Remove dangling links after member/class deletion | `GymService` | `GymServiceTest`, `RelationshipInvariantTest` | m:n integrity |
 | Search members/classes case insensitively | `GymService`, `GymConsole` | `SearchReportsTest`, `SearchReportsConsoleTest` | Excellent searching |
 | Filter classes with available spaces | `GymService`, `GymConsole` | `SearchReportsTest`, `SearchReportsConsoleTest` | Excellent filtering |
-| Per-class attendance and member booking reports | `GymService`, `GymReports` | `SearchReportsTest`, `FullWorkflowTest` | Good/Excellent reporting |
+| Per-class booking occupancy and member booking reports | `GymService`, `GymReports` | `SearchReportsTest`, `FullWorkflowTest` | Good/Excellent reporting |
 | Save and restore valid JSON | `GymFileStore`, `GymSnapshot` | `GymFileStoreTest`, `PersistenceConsoleTest`, `FullWorkflowTest` | Reliability and maintainable architecture |
 | Preserve unique counters after deleted IDs and restart | `GymSnapshot`, `GymService` | `GymSnapshotTest`, `GymFileStoreTest` | Excellent integrity |
 | Refuse missing/malformed/invalid JSON without partial data loss | `GymFileStore`, `GymService` | `InvalidJsonRegressionTest`, `GymSnapshotTest`, `GymFileStoreTest` | Excellent error handling |

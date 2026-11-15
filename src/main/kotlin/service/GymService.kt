@@ -100,12 +100,12 @@ class GymService {
         return classes.values.filter { it.name.contains(term.trim(), ignoreCase = true) }
     }
 
-    fun classAttendance(): List<ClassAttendance> {
+    fun classBookingSummary(): List<ClassBookingSummary> {
         val counts = bookings.groupingBy { it.classId }.eachCount()
-        return classes.values.map { ClassAttendance(it.id, it.name, counts[it.id] ?: 0, it.capacity) }
+        return classes.values.map { ClassBookingSummary(it.id, it.name, counts[it.id] ?: 0, it.capacity) }
     }
 
-    fun classesWithSpace(): List<ClassAttendance> = classAttendance().filter { it.remaining > 0 }
+    fun classesWithSpace(): List<ClassBookingSummary> = classBookingSummary().filter { it.remaining > 0 }
 
     fun memberBookingCounts(): List<MemberBookingCount> {
         val counts = bookings.groupingBy { it.memberId }.eachCount()

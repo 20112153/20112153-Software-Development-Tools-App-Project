@@ -4,7 +4,7 @@ The lecturer's App brief assigns **20% each** to Functionality, Architecture and
 
 | Criterion | Evidence | Remaining checks |
 | --- | --- | --- |
-| Functionality | Full member/class CRUD and explicit booking Create/Read/Update(move)/Delete; name search, availability filtering, attendance/count reports; validation and JSON persistence | User demo of unusual inputs, deleted links, and restart |
+| Functionality | Full member/class CRUD and explicit booking Create/Read/Update(move)/Delete; name search, availability filtering, booking-occupancy/count reports; validation and JSON persistence | User demo of unusual inputs, deleted links, and restart |
 | Architecture / DX | Separate `model`, `service`, `ui`, `persistence`, and `utils`; no separate database, web app, or unnecessary frameworks | Demonstrate menu behavior and separation to lecturer |
 | GitHub | Separate issues #1, #3, #5, #7, #9, #11, #13, #15, #17; linked feature PRs and passing CI; merged remote branches deleted; README/changelog and manual tag instructions | **Confirm lecturer `sdronan` invited** and **manually publish milestone tags/releases** (GitHub App lacks permission) |
 | Gradle | Gradle 9.3.0 wrapper, automated `check` in Actions; custom `verifyProjectStructure`, `verifyDocumentation`, and `verifyConsoleSmoke` tasks plus JaCoCo reporting/coverage verification | **Review all original Gradle lab tasks**; the supplied rubric excerpt does not enumerate them |

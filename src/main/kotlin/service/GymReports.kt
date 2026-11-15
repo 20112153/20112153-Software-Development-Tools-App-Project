@@ -1,7 +1,7 @@
 package service
 
 /** Derived reporting values (not stored separately from the bookings). */
-data class ClassAttendance(
+data class ClassBookingSummary(
     val classId: Int,
     val name: String,
     val booked: Int,
