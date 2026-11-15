@@ -1,3 +1,5 @@
+import java.io.ByteArrayInputStream
+
 plugins {
     kotlin("jvm") version "2.3.21"
     application
@@ -97,7 +99,7 @@ tasks.register<JavaExec>("verifyConsoleSmoke") {
     classpath = sourceSets["main"].runtimeClasspath
     mainClass.set("MainKt")
     workingDir = layout.buildDirectory.dir("console-smoke").get().asFile
-    standardInput = java.io.ByteArrayInputStream(
+    standardInput = ByteArrayInputStream(
         "1\n1\nAlex\n0\n2\n1\nYoga\n2\n0\n3\n1\n1\n1\n0\n0\n".toByteArray()
     )
     doFirst {
